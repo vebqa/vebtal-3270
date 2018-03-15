@@ -10,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.lang.WordUtils;
 import org.h3270.host.S3270.TerminalMode;
 import org.h3270.host.S3270.TerminalType;
 import org.slf4j.Logger;
@@ -45,7 +44,10 @@ public class TN3270Resource {
 		// erst alles klein schreiben
 		String tCmd = cmd.getCommand().toLowerCase().trim();
 		// erster Buchstabe gross
-		tCmd = WordUtils.capitalizeFully(tCmd);
+		String cmdFL = tCmd.substring(0, 1).toUpperCase(); 
+		String cmdRest = tCmd.substring(1);
+		tCmd = cmdFL + cmdRest;
+		
 		String tClass = "org.vebqa.vebtal.tn3270." + tCmd;
 		Response result = null;
 		try {
