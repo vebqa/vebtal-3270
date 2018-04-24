@@ -12,24 +12,24 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.vebqa.vebtal</groupId>
-			<artifactId>vebtal-manager</artifactId>
-			<version>0.0.1-Snapshot</version>
+			<artifactId>vebtal-api</artifactId>
+			<version>0.9</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sf</groupId>
+			<groupId>com.github.vebqa</groupId>
 			<artifactId>f3270</artifactId>
-			<version>1.1.0</version>
+			<version>1.2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>		
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
 			<version>${version.jaxrs}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${version.log4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
