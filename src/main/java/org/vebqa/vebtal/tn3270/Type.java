@@ -27,14 +27,19 @@ public class Type extends AbstractCommand {
 		case "label":
 			label = parts[1];
 			field = new FieldIdentifier(label);
-			driver.write(field, value);
 
 		default:
 			logger.info("Cannot resolve strategy for field identifier. Must be label.");
 		}
 
 		if (field != null) {
-			tResp.setCode("0");
+			try {
+				driver.write(field, value);
+				tResp.setCode("0");
+			} catch (RuntimeException e) {
+				tResp.setCode("1");
+				tResp.setMessage(e.getMessage());
+			}
 		} else {
 			// Field not found!
 			tResp.setCode("1");
