@@ -1,5 +1,6 @@
 package org.vebqa.vebtal.restserver;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,14 +15,16 @@ import org.h3270.host.S3270.TerminalMode;
 import org.h3270.host.S3270.TerminalType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.vebqa.vebtal.TestAdaptionResource;
 import org.vebqa.vebtal.model.Command;
 import org.vebqa.vebtal.model.Response;
 import org.vebqa.vebtal.model.TN3270Session;
 
+import net.sf.f3270.HostCharset;
 import net.sf.f3270.Terminal;
 
 @Path("tn3270")
-public class TN3270Resource {
+public class TN3270Resource implements TestAdaptionResource {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TN3270Resource.class);
 
@@ -34,7 +37,7 @@ public class TN3270Resource {
 	@Path("execute")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response executeTelenese(Command cmd) {
+	public Response execute(Command cmd) {
 		TN3270TestAdaptionPlugin.addCommandToList(cmd);
 		
 		Response tResponse = new Response();
@@ -97,7 +100,10 @@ public class TN3270Resource {
 	public Response createSession(TN3270Session sess) {
 		TN3270TestAdaptionPlugin.addCommandToList(sess);
 		
-		driver =  new Terminal("s3270/client/ws3270.exe", sess.getHost(), Integer.valueOf(sess.getPort()), TerminalType.TYPE_3279, TerminalMode.MODE_80_24, false);
+		// find s3270 terminal emulator
+		File dir = new File("s3270/client/ws3270.exe");
+		
+		driver =  new Terminal(dir.getAbsolutePath(), sess.getHost(), Integer.valueOf(sess.getPort()), TerminalType.TYPE_3279, TerminalMode.MODE_80_24, HostCharset.BRACKET, false);
 		driver.connect();
 		
 		Response tResponse = new Response();

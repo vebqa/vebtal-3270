@@ -35,11 +35,10 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 
 	
 	public String getName() {
-		return "Telenese Plugin for RoboManager";
+		return "TN3270 Plugin for RoboManager";
 	}
 
-	@Override
-	public Class getImplementation() {
+	public Class<?> getImplementation() {
 		return TN3270Resource.class;
 	}
 	
