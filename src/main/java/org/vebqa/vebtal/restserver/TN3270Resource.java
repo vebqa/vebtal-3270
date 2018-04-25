@@ -11,8 +11,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.h3270.host.S3270.TerminalMode;
-import org.h3270.host.S3270.TerminalType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vebqa.vebtal.TestAdaptionResource;
@@ -22,6 +20,8 @@ import org.vebqa.vebtal.model.TN3270Session;
 
 import net.sf.f3270.HostCharset;
 import net.sf.f3270.Terminal;
+import net.sf.f3270.TerminalModel;
+import net.sf.f3270.TerminalType;
 
 @Path("tn3270")
 public class TN3270Resource implements TestAdaptionResource {
@@ -103,7 +103,7 @@ public class TN3270Resource implements TestAdaptionResource {
 		// find s3270 terminal emulator
 		File dir = new File("s3270/client/ws3270.exe");
 		
-		driver =  new Terminal(dir.getAbsolutePath(), sess.getHost(), Integer.valueOf(sess.getPort()), TerminalType.TYPE_3279, TerminalMode.MODE_80_24, HostCharset.BRACKET, false);
+		driver =  new Terminal(dir.getAbsolutePath(), sess.getHost(), Integer.valueOf(sess.getPort()), TerminalType.TYPE_3279, TerminalModel.MODE_80_24, HostCharset.BRACKET, false);
 		driver.connect();
 		
 		Response tResponse = new Response();

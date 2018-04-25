@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -26,14 +27,13 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 	public TN3270TestAdaptionPlugin() {
 		super(TestAdaptionType.ADAPTER);
 	}
-	
+
 	/** Start/Stop Button **/
-	private static final Button btnStartStop = new Button();
-	
+	private static ChoiceBox<String> cbTerminal = new ChoiceBox<String>();
+
 	private static final TableView<CommandResult> commandList = new TableView<>();
 	private static final ObservableList<CommandResult> clData = FXCollections.observableArrayList();
 
-	
 	public String getName() {
 		return "TN3270 Plugin for RoboManager";
 	}
@@ -41,16 +41,18 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 	public Class<?> getImplementation() {
 		return TN3270Resource.class;
 	}
-	
+
 	@Override
 	public Tab startup() {
 		// Richtet den Plugin-spezifischen Tab ein
-		
+
 		Tab seleneseTab = new Tab();
 		seleneseTab.setText("Telenese / TN3270");
-		
-		btnStartStop.setText("Dump screen");
-		btnStartStop.setOnAction(new EventHandler<ActionEvent>() {
+
+		cbTerminal = new ChoiceBox<String>(FXCollections.observableArrayList("Headless", "Terminal"));
+
+		// cbTerminal.setText("Dump screen");
+		cbTerminal.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -63,7 +65,7 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 
 		// Top bauen
 		HBox hbox = new HBox();
-		hbox.getChildren().addAll(btnStartStop);
+		hbox.getChildren().addAll(cbTerminal);
 
 		// Table bauen
 		TableColumn selCommand = new TableColumn("Command");
@@ -98,12 +100,13 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 		root.setTop(hbox);
 		root.setCenter(commandList);
 		seleneseTab.setContent(root);
-	
+
 		return seleneseTab;
 	}
-	
+
 	public static void addCommandToList(TN3270Session aSess) {
-		CommandResult tCR = new CommandResult("TN3270CreateSession", aSess.getHost() + ":" + aSess.getPort(), aSess.getType());
+		CommandResult tCR = new CommandResult("TN3270CreateSession", aSess.getHost() + ":" + aSess.getPort(),
+				aSess.getType());
 		Platform.runLater(() -> clData.add(tCR));
 	}
 
@@ -115,7 +118,7 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 		CommandResult tCR = new CommandResult(aCmd.getCommand(), aCmd.getTarget(), aValue);
 		Platform.runLater(() -> clData.add(tCR));
 	}
-	
+
 	public static void setLatestResult(Boolean success, final String aResult) {
 		Platform.runLater(() -> clData.get(clData.size() - 1).setLogInfo(aResult));
 		Platform.runLater(() -> clData.get(clData.size() - 1).setResult(success));
@@ -123,7 +126,7 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 		commandList.refresh();
 		Platform.runLater(() -> commandList.scrollTo(clData.size() - 1));
 	}
-	
+
 	@Override
 	public boolean shutdown() {
 
