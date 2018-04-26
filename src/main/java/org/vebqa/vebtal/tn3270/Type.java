@@ -21,15 +21,16 @@ public class Type extends AbstractCommand {
 
 		String label = null;
 		FieldIdentifier field = null;
+
 		// konvention: label=x
 		String[] parts = target.split("=");
 		switch (parts[0]) {
 		case "label":
 			label = parts[1];
 			field = new FieldIdentifier(label);
-
+			break;
 		default:
-			logger.info("Cannot resolve strategy for field identifier. Must be label.");
+			break;
 		}
 
 		if (field != null) {
@@ -40,6 +41,16 @@ public class Type extends AbstractCommand {
 				tResp.setCode("1");
 				tResp.setMessage(e.getMessage());
 			}
+		} else if (label == null) {
+			if (label == null) {
+				try {
+					driver.write(value);
+					tResp.setCode("0");
+				} catch (RuntimeException e) {
+					tResp.setCode("1");
+					tResp.setMessage(e.getMessage());
+				}
+			}
 		} else {
 			// Field not found!
 			tResp.setCode("1");
@@ -48,5 +59,4 @@ public class Type extends AbstractCommand {
 
 		return tResp;
 	}
-
 }
