@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,6 +23,8 @@ import javafx.scene.layout.HBox;
 @SuppressWarnings("restriction")
 public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 
+	private static final String ID = "tn3270";
+	
 	public TN3270TestAdaptionPlugin() {
 		super(TestAdaptionType.ADAPTER);
 	}
@@ -132,4 +133,9 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 
 		return true;
 	}
+	
+	@Override
+	public String getAdaptionID() {
+		return ID;
+	}	
 }
