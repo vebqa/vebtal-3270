@@ -12,12 +12,13 @@ public class VerifyText extends AbstractCommand {
 
 	/**
 	 * Implements several strategies to verify a text
-	 * 1 | verifyText | <empty> | text
+	 * 1 | verifyText | empty | text
+	 * 
+	 * @param	driver	terminal driver
 	 * 
 	 */
 	@Override
 	protected Response executeImpl(Terminal driver) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

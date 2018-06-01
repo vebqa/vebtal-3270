@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.restserver;
+package org.vebqa.vebtal.tn3270restserver;
 
 import org.vebqa.vebtal.AbstractTestAdaptionPlugin;
 import org.vebqa.vebtal.TestAdaptionType;
@@ -39,8 +39,11 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 		return "TN3270 Plugin for RoboManager";
 	}
 
+	/**
+	 * this is the new service provider implementation.
+	 */
 	public Class<?> getImplementation() {
-		return TN3270Resource.class;
+		return null;
 	}
 
 	@Override

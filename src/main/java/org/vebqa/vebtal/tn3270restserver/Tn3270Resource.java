@@ -1,15 +1,9 @@
-package org.vebqa.vebtal.restserver;
+package org.vebqa.vebtal.tn3270restserver;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,20 +17,18 @@ import net.sf.f3270.Terminal;
 import net.sf.f3270.TerminalModel;
 import net.sf.f3270.TerminalType;
 
-@Path("tn3270")
-public class TN3270Resource implements TestAdaptionResource {
+public class Tn3270Resource implements TestAdaptionResource {
 
-	private static final Logger logger = LoggerFactory.getLogger(TN3270Resource.class);
+	private static final Logger logger = LoggerFactory.getLogger(Tn3270Resource.class);
 
 	/**
 	 * Terminal
 	 */
 	private static Terminal driver;
 
-	@POST
-	@Path("execute")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	public Tn3270Resource() {
+	}
+	
 	public Response execute(Command cmd) {
 		TN3270TestAdaptionPlugin.addCommandToList(cmd);
 
@@ -98,10 +90,11 @@ public class TN3270Resource implements TestAdaptionResource {
 		return result;
 	}
 
-	@POST
-	@Path("createsession")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * refactor to open command.
+	 * @param	sess	session for the telnet client
+	 * @return	response
+	 */
 	public Response createSession(TN3270Session sess) {
 		TN3270TestAdaptionPlugin.addCommandToList(sess);
 
@@ -115,23 +108,6 @@ public class TN3270Resource implements TestAdaptionResource {
 		Response tResponse = new Response();
 		tResponse.setCode("0");
 		TN3270TestAdaptionPlugin.setLatestResult(true, driver.getScreenText());
-		return tResponse;
-	}
-
-	@Deprecated
-	@POST
-	@Path("closesession")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response closeSession(TN3270Session sess) {
-		TN3270TestAdaptionPlugin.addCommandToList(sess);
-
-		driver.disconnect();
-
-		Response tResponse = new Response();
-		tResponse.setCode("0");
-		TN3270TestAdaptionPlugin.setLatestResult(true,
-				"sucessfully diconnected from: " + sess.getHost() + ":" + sess.getPort());
 		return tResponse;
 	}
 }
