@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vebqa.vebtal</groupId>
 	<artifactId>vebtal-3270</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Test Adaption Layer for Telnet 3270 terminals</name>
 	<description>Provides access for testing Telnet 3270 graphical user interfaces with junit / assertj or keyword driven approach</description>
@@ -145,4 +144,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<version>0.9.1</version>
 </project>
