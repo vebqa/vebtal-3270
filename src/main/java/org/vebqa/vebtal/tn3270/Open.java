@@ -3,7 +3,7 @@ package org.vebqa.vebtal.tn3270;
 import java.io.File;
 
 import org.vebqa.vebtal.model.Response;
-import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
+import org.vebqa.vebtal.tn3270restserver.Tn3270Resource;
 
 import net.sf.f3270.HostCharset;
 import net.sf.f3270.Terminal;
@@ -29,9 +29,10 @@ public class Open extends AbstractCommand {
 				TerminalType.TYPE_3279, TerminalModel.MODE_80_24, HostCharset.BRACKET, false);
 		driver.connect();
 
+		Tn3270Resource.setDriver(driver);
+		
 		Response tResponse = new Response();
 		tResponse.setCode("0");
-		TN3270TestAdaptionPlugin.setLatestResult(true, driver.getScreenText());
 		return tResponse;
 	}
 

@@ -90,24 +90,7 @@ public class Tn3270Resource implements TestAdaptionResource {
 		return result;
 	}
 
-	/**
-	 * refactor to open command.
-	 * @param	sess	session for the telnet client
-	 * @return	response
-	 */
-	public Response createSession(TN3270Session sess) {
-		TN3270TestAdaptionPlugin.addCommandToList(sess);
-
-		// find s3270 terminal emulator
-		File dir = new File("s3270/client/ws3270.exe");
-
-		driver = new Terminal(dir.getAbsolutePath(), sess.getHost(), Integer.valueOf(sess.getPort()),
-				TerminalType.TYPE_3279, TerminalModel.MODE_80_24, HostCharset.BRACKET, false);
-		driver.connect();
-
-		Response tResponse = new Response();
-		tResponse.setCode("0");
-		TN3270TestAdaptionPlugin.setLatestResult(true, driver.getScreenText());
-		return tResponse;
+	public static void setDriver(Terminal aDriver) {
+		driver = aDriver;
 	}
 }
