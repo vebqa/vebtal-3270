@@ -21,12 +21,41 @@ public class Open extends AbstractCommand {
 		// find s3270 terminal emulator
 		File dir = new File("s3270/client/ws3270.exe");
 
-		// target: 127.0.0.1:23
-		String aHost = this.target.substring(0, this.target.indexOf(":"));
-		String aPort = this.target.substring(this.target.indexOf(":") + 1, this.target.length());
+		// Refactor: Context
+		// target = value
+		// column, row, labelText
+		String host = "localhost";
+		int port = 23;
+		String type = "TYPE_3279";
+		String model = "MODE_80_24";
+		String charset = "BRACKET";
 		
-		driver = new Terminal(dir.getAbsolutePath(), aHost, Integer.valueOf(aPort),
-				TerminalType.TYPE_3279, TerminalModel.MODE_80_24, HostCharset.BRACKET, false);
+		// Beispiel: target= host=ctbtest;port=992;codepage=1141;ssltype=sslv3
+		String[] someToken = target.split(";");
+
+		for (String aToken : someToken) {
+			// Needs an equal
+			String[] parts = aToken.split("=");
+			switch (parts[0]) {
+			case "host":
+				host = String.valueOf(parts[1]);
+				break;
+			case "port":
+				port = Integer.valueOf(parts[1]);
+				break;
+			case "type":
+				type = String.valueOf(parts[1]);
+				break;
+			case "model":
+				model = String.valueOf(parts[1]);
+				break;
+			case "charset":
+				charset = String.valueOf(parts[1]);
+			}
+		}
+		
+		driver = new Terminal(dir.getAbsolutePath(), host, Integer.valueOf(port),
+				TerminalType.valueOf(String.valueOf(type)), TerminalModel.valueOf(String.valueOf(model)), HostCharset.valueOf(charset), false);
 		driver.connect();
 
 		Tn3270Resource.setDriver(driver);
