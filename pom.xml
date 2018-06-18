@@ -2,8 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.vebqa.vebtal</groupId>
+	<groupId>com.github.vebqa</groupId>
 	<artifactId>vebtal-3270</artifactId>
+	<version>0.9.1</version>
 
 	<name>Test Adaption Layer for Telnet 3270 terminals</name>
 	<description>Provides access for testing Telnet 3270 graphical user interfaces with junit / assertj or keyword driven approach</description>
@@ -144,5 +145,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<version>0.9.1</version>
 </project>
