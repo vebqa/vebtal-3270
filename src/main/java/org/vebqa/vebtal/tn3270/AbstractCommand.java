@@ -1,11 +1,10 @@
 package org.vebqa.vebtal.tn3270;
 
-import org.vebqa.vebtal.command.ICommand;
 import org.vebqa.vebtal.model.Response;
 
 import net.sf.f3270.Terminal;
 
-public abstract class AbstractCommand implements ICommand {
+public abstract class AbstractCommand {
 	
 	protected final String command;
 	protected final String target;
