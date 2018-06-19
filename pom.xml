@@ -10,6 +10,8 @@
 	<description>Provides access for testing Telnet 3270 graphical user interfaces with junit / assertj or keyword driven approach</description>
 	<inceptionYear>2018</inceptionYear>
 
+	<url>https://github.com/vebqa/vebtal-3270</url>
+	
 	<packaging>jar</packaging>
 
 	<licenses>
