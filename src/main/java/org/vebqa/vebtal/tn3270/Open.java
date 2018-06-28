@@ -2,6 +2,7 @@ package org.vebqa.vebtal.tn3270;
 
 import java.io.File;
 
+import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 import org.vebqa.vebtal.tn3270restserver.Tn3270Resource;
 
@@ -14,6 +15,7 @@ public class Open extends AbstractCommand {
 
 	public Open(String aCommand, String aTarget, String aValue) {
 		super(aCommand, aTarget, aValue);
+		this.type = CommandType.ACTION;
 	}
 
 	@Override

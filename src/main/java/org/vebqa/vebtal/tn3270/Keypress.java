@@ -2,6 +2,7 @@ package org.vebqa.vebtal.tn3270;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 
 import net.sf.f3270.Terminal;
@@ -12,6 +13,7 @@ public class Keypress extends AbstractCommand {
 	
 	public Keypress(String aCommand, String aTarget, String aValue) {
 		super(aCommand, aTarget, aValue);
+		this.type = CommandType.ACTION;
 	}
 
 	@Override
