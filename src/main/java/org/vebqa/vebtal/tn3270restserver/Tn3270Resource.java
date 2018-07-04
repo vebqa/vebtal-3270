@@ -26,6 +26,9 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 	}
 	
 	public Response execute(Command cmd) {
+		
+		TN3270TestAdaptionPlugin.setDisableUserActions(true);
+		
 		TN3270TestAdaptionPlugin.addCommandToList(cmd);
 
 		Response tResponse = new Response();
@@ -60,6 +63,7 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 		if (result == null) {
 			tResponse.setCode("1");
 			tResponse.setMessage("Cannot resolve findby.");
+			TN3270TestAdaptionPlugin.setDisableUserActions(true);
 			return tResponse;
 		}
 		if (result.getCode() != "0") {
@@ -73,6 +77,8 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 				TN3270TestAdaptionPlugin.setLatestResult(true, "not connected to host");
 			}
 		}
+		
+		TN3270TestAdaptionPlugin.setDisableUserActions(true);
 		return result;
 	}
 

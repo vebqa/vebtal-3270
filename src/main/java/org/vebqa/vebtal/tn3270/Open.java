@@ -2,8 +2,11 @@ package org.vebqa.vebtal.tn3270;
 
 import java.io.File;
 
+import org.vebqa.vebtal.GuiManager;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
+import org.vebqa.vebtal.sut.SutStatus;
+import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 import org.vebqa.vebtal.tn3270restserver.Tn3270Resource;
 
 import net.sf.f3270.HostCharset;
@@ -64,6 +67,9 @@ public class Open extends AbstractCommand {
 		
 		Response tResponse = new Response();
 		tResponse.setCode("0");
+		
+		GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.CONNECTED);
+		
 		return tResponse;
 	}
 
