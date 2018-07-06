@@ -1,6 +1,7 @@
 package org.vebqa.vebtal.tn3270;
 
 import org.vebqa.vebtal.GuiManager;
+import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 import org.vebqa.vebtal.sut.SutStatus;
@@ -16,7 +17,8 @@ public class Close extends AbstractCommand {
 	}
 
 	@Override
-	public Response executeImpl(Terminal driver) {
+	public Response executeImpl(Object aDriver) {
+		Terminal driver = (Terminal)aDriver;
 		Response tResp = new Response();
 		driver.disconnect();
 		tResp.setCode("0");
@@ -27,4 +29,8 @@ public class Close extends AbstractCommand {
 		return tResp;
 	}
 
+	@Override
+	public CommandType getType() {
+		return this.type;
+	}
 }

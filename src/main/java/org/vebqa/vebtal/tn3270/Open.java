@@ -3,6 +3,7 @@ package org.vebqa.vebtal.tn3270;
 import java.io.File;
 
 import org.vebqa.vebtal.GuiManager;
+import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 import org.vebqa.vebtal.sut.SutStatus;
@@ -22,7 +23,8 @@ public class Open extends AbstractCommand {
 	}
 
 	@Override
-	public Response executeImpl(Terminal driver) {
+	public Response executeImpl(Object aDriver) {
+		Terminal driver = (Terminal)aDriver;
 		// find s3270 terminal emulator
 		File dir = new File("s3270/client/ws3270.exe");
 
@@ -72,5 +74,4 @@ public class Open extends AbstractCommand {
 		
 		return tResponse;
 	}
-
 }

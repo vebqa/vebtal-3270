@@ -2,6 +2,7 @@ package org.vebqa.vebtal.tn3270;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 
@@ -18,7 +19,8 @@ public class Type extends AbstractCommand {
 	}
 
 	@Override
-	public Response executeImpl(Terminal driver) {
+	public Response executeImpl(Object aDriver) {
+		Terminal driver = (Terminal)aDriver;
 		Response tResp = new Response();
 
 		String label = null;

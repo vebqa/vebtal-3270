@@ -4,6 +4,7 @@ import org.vebqa.vebtal.AbstractTestAdaptionPlugin;
 import org.vebqa.vebtal.TestAdaptionType;
 import org.vebqa.vebtal.model.Command;
 import org.vebqa.vebtal.model.CommandResult;
+import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.TN3270Session;
 
 import javafx.application.Platform;
@@ -19,17 +20,17 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 	 * unique id of the test adapter
 	 */
 	public static final String ID = "tn3270";
-	
+
 	/**
 	 * tableview with commands
 	 */
 	protected static final TableView<CommandResult> commandList = new TableView<>();
-	
+
 	/**
 	 * results after execution
 	 */
-	protected static final ObservableList<CommandResult> clData = FXCollections.observableArrayList();		
-	
+	protected static final ObservableList<CommandResult> clData = FXCollections.observableArrayList();
+
 	public TN3270TestAdaptionPlugin() {
 		super(TestAdaptionType.ADAPTER);
 	}
@@ -43,18 +44,12 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 		return createTab(ID, commandList, clData);
 	}
 
-	public static void addCommandToList(TN3270Session aSess) {
-		CommandResult tCR = new CommandResult("TN3270CreateSession", aSess.getHost() + ":" + aSess.getPort(),
-				aSess.getType());
-		Platform.runLater(() -> clData.add(tCR));
-	}
-
-	public static void addCommandToList(Command aCmd) {
+	public static void addCommandToList(Command aCmd, CommandType aType) {
 		String aValue = aCmd.getValue();
 		if (aCmd.getCommand().toLowerCase().indexOf("password") > 0) {
 			aValue = "*****";
 		}
-		CommandResult tCR = new CommandResult(aCmd.getCommand(), aCmd.getTarget(), aValue);
+		CommandResult tCR = new CommandResult(aCmd.getCommand(), aCmd.getTarget(), aValue, aType);
 		Platform.runLater(() -> clData.add(tCR));
 	}
 
@@ -70,16 +65,16 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 	public boolean shutdown() {
 		return true;
 	}
-	
+
 	/**
 	 * this is the new service provider implementation.
 	 */
 	public Class<?> getImplementation() {
 		return null;
 	}
-	
+
 	@Override
 	public String getAdaptionID() {
 		return ID;
-	}	
+	}
 }

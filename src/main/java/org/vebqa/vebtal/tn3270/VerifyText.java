@@ -1,5 +1,6 @@
 package org.vebqa.vebtal.tn3270;
 
+import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 
@@ -16,11 +17,12 @@ public class VerifyText extends AbstractCommand {
 	 * Implements several strategies to verify a text
 	 * 1 | verifyText | empty | text
 	 * 
-	 * @param	driver	terminal driver
+	 * @param	aDriver	terminal driver
 	 * 
 	 */
 	@Override
-	protected Response executeImpl(Terminal driver) {
+	public Response executeImpl(Object aDriver) {
+		Terminal driver = (Terminal)aDriver;
 		return null;
 	}
 

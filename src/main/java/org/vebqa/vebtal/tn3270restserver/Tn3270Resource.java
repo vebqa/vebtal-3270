@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.vebqa.vebtal.AbstractTestAdaptionResource;
 import org.vebqa.vebtal.TestAdaptionResource;
 import org.vebqa.vebtal.model.Command;
+import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
 
 import net.sf.f3270.Terminal;
@@ -29,8 +30,6 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 		
 		TN3270TestAdaptionPlugin.setDisableUserActions(true);
 		
-		TN3270TestAdaptionPlugin.addCommandToList(cmd);
-
 		Response tResponse = new Response();
 
 		Response result = null;
@@ -38,8 +37,15 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 			Class<?> cmdClass = Class.forName("org.vebqa.vebtal.tn3270." + getCommandClassName(cmd));
 			Constructor<?> cons = cmdClass.getConstructor(String.class, String.class, String.class);
 			Object cmdObj = cons.newInstance(cmd.getCommand(), cmd.getTarget(), cmd.getValue());
-			Method m = cmdClass.getDeclaredMethod("executeImpl", Terminal.class);
-
+			
+			// get type
+			Method mType = cmdClass.getMethod("getType");
+			CommandType cmdType = (CommandType)mType.invoke(cmdObj);
+			TN3270TestAdaptionPlugin.addCommandToList(cmd, cmdType);
+			
+			// execute
+			Method m = cmdClass.getDeclaredMethod("executeImpl", Object.class);
+			
 			setStart();
 			result = (Response) m.invoke(cmdObj, driver);
 			setFinished();
