@@ -1,5 +1,6 @@
 package org.vebqa.vebtal.tn3270restserver;
 
+import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.vebqa.vebtal.AbstractTestAdaptionPlugin;
 import org.vebqa.vebtal.TestAdaptionType;
 import org.vebqa.vebtal.model.Command;
@@ -76,5 +77,11 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 	@Override
 	public String getAdaptionID() {
 		return ID;
+	}
+
+	@Override
+	public FileBasedConfiguration loadConfigString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
