@@ -26,7 +26,8 @@ public class Open extends AbstractCommand {
 	public Response executeImpl(Object aDriver) {
 		Terminal driver = (Terminal)aDriver;
 		// find s3270 terminal emulator
-		File dir = new File("s3270/client/ws3270.exe");
+		String emulatorPath = GuiManager.getinstance().getConfig().getString("emulator.path");
+		File dir = new File(emulatorPath);
 
 		// Refactor: Context
 		// target = value
