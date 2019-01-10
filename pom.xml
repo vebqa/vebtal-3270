@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>com.github.vebqa</groupId>
 		<artifactId>vebtal-parent</artifactId>
-		<version>0.9.4</version>
+		<version>0.9.5</version>
 	</parent>
 	<artifactId>vebtal-3270</artifactId>
-	<version>0.9.7</version>
+	<version>0.9.8</version>
 
 	<name>Test Adaption Layer for Telnet 3270 terminals</name>
 	<description>Provides access for testing Telnet 3270 graphical user interfaces with junit / assertj or keyword driven approach</description>
@@ -25,6 +25,10 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
+	<properties>
+		<modulename>vebtal3270</modulename>
+	</properties>
 
 	<scm>
 		<url>https://github.com/vebqa/vebtal-3270</url>
@@ -46,7 +50,7 @@
 		<dependency>
 			<groupId>com.github.vebqa</groupId>
 			<artifactId>vebtal-api</artifactId>
-			<version>0.9.7</version>
+			<version>0.9.8</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.vebqa</groupId>
