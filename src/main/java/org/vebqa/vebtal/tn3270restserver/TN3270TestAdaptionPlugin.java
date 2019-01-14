@@ -1,13 +1,11 @@
 package org.vebqa.vebtal.tn3270restserver;
 
 import org.apache.commons.configuration2.CombinedConfiguration;
-import org.apache.commons.configuration2.FileBasedConfiguration;
 import org.vebqa.vebtal.AbstractTestAdaptionPlugin;
 import org.vebqa.vebtal.TestAdaptionType;
 import org.vebqa.vebtal.model.Command;
 import org.vebqa.vebtal.model.CommandResult;
 import org.vebqa.vebtal.model.CommandType;
-import org.vebqa.vebtal.model.TN3270Session;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 
-@SuppressWarnings("restriction")
 public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 
 	/**

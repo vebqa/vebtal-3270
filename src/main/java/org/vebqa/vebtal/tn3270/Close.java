@@ -1,6 +1,7 @@
 package org.vebqa.vebtal.tn3270;
 
 import org.vebqa.vebtal.GuiManager;
+import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
@@ -9,6 +10,7 @@ import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 
 import net.sf.f3270.Terminal;
 
+@Keyword(command = "close", description = "Close terminal", hintTarget = "<empty>", hintValue = "<empty")
 public class Close extends AbstractCommand {
 
 	public Close(String aCommand, String aTarget, String aValue) {
@@ -18,14 +20,14 @@ public class Close extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
-		Terminal driver = (Terminal)aDriver;
+		Terminal driver = (Terminal) aDriver;
 		Response tResp = new Response();
 		driver.disconnect();
 		tResp.setCode("0");
 		tResp.setMessage("Successfully disconnected from host");
-		
+
 		GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.DISCONNECTED);
-		
+
 		return tResp;
 	}
 
