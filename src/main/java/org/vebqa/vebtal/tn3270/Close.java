@@ -23,7 +23,7 @@ public class Close extends AbstractCommand {
 		Terminal driver = (Terminal) aDriver;
 		Response tResp = new Response();
 		driver.disconnect();
-		tResp.setCode("0");
+		tResp.setCode(Response.PASSED);
 		tResp.setMessage("Successfully disconnected from host");
 
 		GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.DISCONNECTED);

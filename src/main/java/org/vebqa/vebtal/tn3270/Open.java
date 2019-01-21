@@ -69,7 +69,7 @@ public class Open extends AbstractCommand {
 		Tn3270Resource.setDriver(driver);
 		
 		Response tResponse = new Response();
-		tResponse.setCode("0");
+		tResponse.setCode(Response.PASSED);
 		
 		GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.CONNECTED);
 		

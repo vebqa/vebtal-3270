@@ -16,7 +16,7 @@ public class Ping extends AbstractCommand {
 	public Response executeImpl(Object aDriver) {
 
 		Response tResponse = new Response();
-		tResponse.setCode("0");
+		tResponse.setCode(Response.PASSED);
 		tResponse.setMessage("Service " + TN3270TestAdaptionPlugin.ID + " is up and running.");
 		
 		return tResponse;

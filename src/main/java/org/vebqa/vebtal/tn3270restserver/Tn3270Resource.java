@@ -67,7 +67,7 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 		}
 
 		if (result == null) {
-			tResponse.setCode("1");
+			tResponse.setCode(Response.FAILED);
 			tResponse.setMessage("Cannot resolve findby.");
 			TN3270TestAdaptionPlugin.setDisableUserActions(true);
 			return tResponse;

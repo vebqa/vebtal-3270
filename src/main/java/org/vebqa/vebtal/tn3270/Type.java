@@ -40,24 +40,24 @@ public class Type extends AbstractCommand {
 		if (field != null) {
 			try {
 				driver.write(field, value);
-				tResp.setCode("0");
+				tResp.setCode(Response.PASSED);
 			} catch (RuntimeException e) {
-				tResp.setCode("1");
+				tResp.setCode(Response.FAILED);
 				tResp.setMessage(e.getMessage());
 			}
 		} else if (label == null) {
 			if (label == null) {
 				try {
 					driver.write(value);
-					tResp.setCode("0");
+					tResp.setCode(Response.PASSED);
 				} catch (RuntimeException e) {
-					tResp.setCode("1");
+					tResp.setCode(Response.FAILED);
 					tResp.setMessage(e.getMessage());
 				}
 			}
 		} else {
 			// Field not found!
-			tResp.setCode("1");
+			tResp.setCode(Response.FAILED);
 			tResp.setMessage("Field not found!");
 		}
 

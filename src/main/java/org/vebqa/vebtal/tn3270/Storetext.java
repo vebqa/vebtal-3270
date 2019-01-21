@@ -38,16 +38,16 @@ public class Storetext extends AbstractCommand {
 			Field resolvedField;
 			try {
 				resolvedField = driver.getField(field);
-				tResp.setCode("0");
+				tResp.setCode(Response.PASSED);
 				tResp.setStoredValue(resolvedField.getValue());
 				tResp.setStoredKey(value);
 			} catch (RuntimeException e) {
-				tResp.setCode("1");
+				tResp.setCode(Response.FAILED);
 				tResp.setMessage(e.getMessage());
 			}
 		} else {
 			// Field not found!
-			tResp.setCode("1");
+			tResp.setCode(Response.FAILED);
 			tResp.setMessage("Field not found!");
 		}
 

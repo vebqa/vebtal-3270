@@ -42,10 +42,10 @@ public class Verifytext extends AbstractCommand {
 		String foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber - 1 + searchStringLength).toString(); //Row & Column values decremented with 1 for the convenience of Tosca Users
 		
 		if (foundString.equals(searchString)) {
-			tResp.setCode("0");
+			tResp.setCode(Response.PASSED);
 			tResp.setMessage("Matching text found!");
 		} else {
-			tResp.setCode("1");
+			tResp.setCode(Response.FAILED);
 			tResp.setMessage("Text does not match! Found String: '" + foundString + "'");
 		}
 
