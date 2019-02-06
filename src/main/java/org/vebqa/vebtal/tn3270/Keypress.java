@@ -2,12 +2,15 @@ package org.vebqa.vebtal.tn3270;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
+import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 
 import net.sf.f3270.Terminal;
 
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "keyPress", description = "press a specific key", hintTarget = "<[key]>")
 public class Keypress extends AbstractCommand {
 
 	private static final Logger logger = LoggerFactory.getLogger(Keypress.class);

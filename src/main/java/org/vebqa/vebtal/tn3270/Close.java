@@ -10,7 +10,7 @@ import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 
 import net.sf.f3270.Terminal;
 
-@Keyword(command = "close", description = "Close terminal", hintTarget = "<empty>", hintValue = "<empty")
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "close", description = "Close terminal", hintTarget = "<empty>", hintValue = "<empty")
 public class Close extends AbstractCommand {
 
 	public Close(String aCommand, String aTarget, String aValue) {

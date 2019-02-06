@@ -1,13 +1,16 @@
 package org.vebqa.vebtal.tn3270;
 
 import org.h3270.host.Field;
+import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
+import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 
 import net.sf.f3270.FieldIdentifier;
 import net.sf.f3270.Terminal;
 
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "storeText", description = "get text from screen", hintTarget = "label=", hintValue = "<buffername>")
 public class Storetext extends AbstractCommand {
 
 	public Storetext(String aCommand, String aTarget, String aValue) {

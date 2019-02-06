@@ -3,6 +3,7 @@ package org.vebqa.vebtal.tn3270;
 import java.io.File;
 
 import org.vebqa.vebtal.GuiManager;
+import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
@@ -15,6 +16,7 @@ import net.sf.f3270.Terminal;
 import net.sf.f3270.TerminalModel;
 import net.sf.f3270.TerminalType;
 
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "open", description = "Open a terminal", hintTarget = "<empty>", hintValue = "<empty")
 public class Open extends AbstractCommand {
 
 	public Open(String aCommand, String aTarget, String aValue) {

@@ -1,10 +1,14 @@
 package org.vebqa.vebtal.tn3270;
 
+import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;
 import org.vebqa.vebtal.model.Response;
+import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
+
 import net.sf.f3270.Terminal;
 
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "verifyText", description = "verify text", hintTarget = "row=;col=", hintValue = "<text")
 public class Verifytext extends AbstractCommand {
 
 	public Verifytext(String aCommand, String aTarget, String aValue) {
