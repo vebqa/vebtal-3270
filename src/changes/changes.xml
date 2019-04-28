@@ -1,0 +1,113 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+	<properties>
+		<title>VEBTAL PDF - Test Adaption Layer</title>
+		<author email="kdoerges@googlemail.com">Karsten Doerges</author>
+	</properties>
+	<body>
+		<release version="0.9.12" date="2019-03.19" description="">
+			<action dev="kdoerges" type="add">
+				update dependencies
+			</action>
+		</release>
+		<release version="0.9.11" date="2019-03.01" description="">
+			<action dev="kdoerges" type="update">
+				update dependencies
+			</action>
+			<action dev="kdoerges" type="fix">
+				fix pmd issues
+			</action>			
+		</release>
+		<release version="0.9.10" date="2019-02.08" description="">
+			<action dev="kdoerges" type="add">
+				add annotations to keyword implementation
+			</action>
+			<action dev="kdoerges" type="update">
+				update dependencies
+			</action>
+		</release>
+		<release version="0.9.9" date="2019-01.21" description="">
+			<action dev="radjindi" type="fix">
+				Response Code Value replaced with PASSED or FAILED
+			</action>
+			<action dev="kdoerges" type="fix">
+				use keyword marker for all commands
+			</action>
+			<action dev="kdoerges" type="add">
+				implemented row and column filter for verifyText
+			</action>			
+		</release>
+		<release version="0.9.8" date="2019-01.10" description="">
+			<action dev="kdoerges" type="add">
+				update dependencies
+			</action>
+		</release>
+		<release version="0.9.7" date="2019-01.06" description="">
+			<action dev="kdoerges" type="update">
+				refactor build to parent
+			</action>
+		</release>
+		<release version="0.9.5" date="2018-11.12" description="">
+			<action dev="kdoerges" type="update">
+				implement user configuration
+			</action>
+			<action dev="kdoerges" type="update">
+				update dependencies
+			</action>
+		</release>
+		<release version="0.9.4" date="2018-07.31" description="">
+			<action dev="kdoerges" type="add">
+				refactored AbstractCommand,
+				visualize command type
+			</action>
+			<action dev="kdoerges" type="add">
+				implement config loader
+			</action>
+		</release>
+		<release version="0.9.3" date="2018-07.04" description="">
+			<action dev="kdoerges" type="add">
+				implement commandtype for keywords
+			</action>
+			<action dev="kdoerges" type="add">
+				refactor gui notification
+			</action>
+		</release>
+		<release version="0.9.2" date="2018-06.19" description="">
+			<action dev="kdoerges" type="update">
+				update dependencies
+			</action>
+			<action dev="kdoerges" type="add">
+				use common build process
+			</action>
+		</release>
+		<release version="0.9.1" date="2018-06.19" description="">
+			<action dev="kdoerges" type="add">
+				open command should be confirgured
+				with type, model and charset
+			</action>
+			<action dev="kdoerges" type="add">
+				implement new open command instead
+				of TNCreateSession (removed)
+			</action>
+			<action dev="kdoerges" type="add">
+				add close command
+			</action>
+			<action dev="kdoerges" type="add">
+				implement type without label,
+				clear signal for keypress command
+			</action>
+			<action dev="kdoerges" type="add">
+				refactored TerminalModel,
+				TerminalType
+			</action>
+			<action dev="kdoerges" type="add">
+				setup interface for service loader
+			</action>
+			<action dev="kdoerges" type="add">
+				initial release, moved from other
+				repo
+			</action>
+		</release>
+	</body>
+</document>

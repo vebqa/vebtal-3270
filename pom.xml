@@ -43,7 +43,12 @@
 		<developer>
 			<name>Karsten Doerges</name>
 			<email>kdoerges@googlemail.com</email>
+			<url>https://github.com/kdoerges</url>
 		</developer>
+		<developer>
+		<name>Nithiyaa Radjindirin</name>
+		<url>https://github.com/nitfeu</url>
+		</developer>		
 	</developers>
 
 	<dependencies>
