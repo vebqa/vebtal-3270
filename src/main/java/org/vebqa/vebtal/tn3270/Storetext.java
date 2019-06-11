@@ -10,7 +10,7 @@ import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 import net.sf.f3270.FieldIdentifier;
 import net.sf.f3270.Terminal;
 
-@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "storeText", description = "get text from screen", hintTarget = "label=", hintValue = "<buffername>")
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "storeText", description = "get text from screen", hintTarget = "label=;row=;column=;length=", hintValue = "<buffername>")
 public class Storetext extends AbstractCommand {
 
 	public Storetext(String aCommand, String aTarget, String aValue) {
@@ -20,23 +20,58 @@ public class Storetext extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
-		Terminal driver = (Terminal)aDriver;
+		Terminal driver = (Terminal) aDriver;
 		Response tResp = new Response();
 
 		String label = null;
 		FieldIdentifier field = null;
+		boolean identByLabel = false;
+		int rowNumber = -1;
+		int columnNumber = -1;
+		int length = -1;
 
-		// konvention: label=x
-		String[] parts = target.split("=");
-		switch (parts[0]) {
-		case "label":
-			label = parts[1];
-			field = new FieldIdentifier(label);
-			break;
-		default:
-			break;
+		// example:
+		// target: "row=10;column=21"
+		// alt. target: "label="myLabel"
+		// dont mix label and row/column; label is leading resolver
+		String[] parts = target.split(";");
+
+		for (String aToken : parts) {
+			String[] part = aToken.split("=");
+			switch (part[0]) {
+			case "label":
+				label = part[1];
+				identByLabel = true;
+				field = new FieldIdentifier(label);
+				break;
+			case "row":
+				rowNumber = Integer.valueOf(part[1]);
+				break;
+			case "column":
+				columnNumber = Integer.valueOf(part[1]);
+				break;
+			case "length":
+				length = Integer.valueOf(part[1]);
+				break;
+
+			default:
+				break;
+			}
 		}
 
+		if (field == null && rowNumber == -1 && columnNumber == -1) {
+			tResp.setCode(Response.FAILED);
+			tResp.setMessage("label or row/columns identifier missing. Cannot resolve field!");
+			return tResp;
+		}
+
+		if (identByLabel && field == null) {
+			tResp.setCode(Response.FAILED);
+			tResp.setMessage("tried to identify field by label, but it failed: label=" + label);
+			return tResp;
+		}
+
+		// if we resolve to a label we should get a field already.
 		if (field != null) {
 			Field resolvedField;
 			try {
@@ -48,13 +83,48 @@ public class Storetext extends AbstractCommand {
 				tResp.setCode(Response.FAILED);
 				tResp.setMessage(e.getMessage());
 			}
-		} else {
-			// Field not found!
-			tResp.setCode(Response.FAILED);
-			tResp.setMessage("Field not found!");
+			return tResp;
 		}
 
+		if (!identByLabel) {
+			String foundString;
+			if (length > 0) {
+				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber + length); // Row &
+																												// Column
+																												// values
+																												// decremented
+																												// with
+																												// 1 for
+																												// the
+																												// convenience
+																												// of
+																												// Tosca
+																												// Users
+			} else {
+				length = driver.getLine(rowNumber - 1).length();
+				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, length - columnNumber); // Row &
+																												// Column
+																												// values
+																												// decremented
+																												// with
+																												// 1 for
+																												// the
+																												// convenience
+																												// of
+																												// Tosca
+																												// Users
+			}
+
+			if (foundString != null) {
+				tResp.setCode(Response.PASSED);
+				tResp.setMessage("Result: " + foundString);
+				tResp.setStoredKey(value);
+				tResp.setStoredValue(foundString);
+			} else {
+				tResp.setCode(Response.FAILED);
+				tResp.setMessage("Text does not match! Found String: '" + foundString + "'");
+			}
+		}
 		return tResp;
 	}
-
 }

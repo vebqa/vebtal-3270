@@ -6,6 +6,17 @@
 		<author email="kdoerges@googlemail.com">Karsten Doerges</author>
 	</properties>
 	<body>
+		<release version="1.0.1" date="" description="">
+			<action dev="kdoerges" type="add">
+				storeText will find text by label
+			</action>
+			<action dev="kdoerges" type="add">
+				storeText will find text by row, column and length
+			</action>
+			<action dev="kdoerges" type="add">
+				open terminal in debug mode with terminal screen shown while test run
+			</action>	
+		</release>
 		<release version="1.0.0" date="2019-05.08" description="">
 			<action dev="kdoerges" type="update">
 				update to parent 1.0.0

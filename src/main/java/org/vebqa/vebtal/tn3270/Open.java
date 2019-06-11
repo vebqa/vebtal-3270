@@ -26,7 +26,7 @@ public class Open extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
-		Terminal driver = (Terminal)aDriver;
+		Terminal driver = (Terminal) aDriver;
 		// find s3270 terminal emulator
 		String emulatorPath = GuiManager.getinstance().getConfig().getString("emulator.path");
 		File dir = new File(emulatorPath);
@@ -39,7 +39,8 @@ public class Open extends AbstractCommand {
 		String type = "TYPE_3279";
 		String model = "MODE_80_24";
 		String charset = "BRACKET";
-		
+		String debug = "false";
+
 		// Beispiel: target= host=ctbtest;port=992;codepage=1141;ssltype=sslv3
 		String[] someToken = target.split(";");
 
@@ -61,20 +62,29 @@ public class Open extends AbstractCommand {
 				break;
 			case "charset":
 				charset = String.valueOf(parts[1]);
+			case "debug":
+				debug = String.valueOf(parts[1]);
 			}
 		}
-		
-		driver = new Terminal(dir.getAbsolutePath(), host, Integer.valueOf(port),
-				TerminalType.valueOf(String.valueOf(type)), TerminalModel.valueOf(String.valueOf(model)), HostCharset.valueOf(charset), false);
+
+		if (debug.toLowerCase().contains("true")) {
+			driver = new Terminal(dir.getAbsolutePath(), host, Integer.valueOf(port),
+					TerminalType.valueOf(String.valueOf(type)), TerminalModel.valueOf(String.valueOf(model)),
+					HostCharset.valueOf(charset), true, true);
+		} else {
+			driver = new Terminal(dir.getAbsolutePath(), host, Integer.valueOf(port),
+					TerminalType.valueOf(String.valueOf(type)), TerminalModel.valueOf(String.valueOf(model)),
+					HostCharset.valueOf(charset), false);
+		}
 		driver.connect();
 
 		Tn3270Resource.setDriver(driver);
-		
+
 		Response tResponse = new Response();
 		tResponse.setCode(Response.PASSED);
-		
+
 		GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.CONNECTED);
-		
+
 		return tResponse;
 	}
 }
