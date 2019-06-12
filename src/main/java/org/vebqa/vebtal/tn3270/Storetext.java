@@ -87,9 +87,10 @@ public class Storetext extends AbstractCommand {
 		}
 
 		if (!identByLabel) {
-			String foundString;
+			String foundString = null;
+			try {
 			if (length > 0) {
-				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber + length); // Row &
+				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber + length - 1); // Row &
 																												// Column
 																												// values
 																												// decremented
@@ -102,7 +103,7 @@ public class Storetext extends AbstractCommand {
 																												// Users
 			} else {
 				length = driver.getLine(rowNumber - 1).length();
-				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, length - columnNumber); // Row &
+				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, length - columnNumber - 1); // Row &
 																												// Column
 																												// values
 																												// decremented
@@ -114,7 +115,11 @@ public class Storetext extends AbstractCommand {
 																												// Tosca
 																												// Users
 			}
-
+			} catch (NullPointerException e) {
+				tResp.setCode(Response.FAILED);
+				tResp.setMessage(e.getMessage());
+				return tResp;
+			}
 			if (foundString != null) {
 				tResp.setCode(Response.PASSED);
 				tResp.setMessage("Result: " + foundString);
