@@ -7,6 +7,9 @@
 	</properties>
 	<body>
 		<release version="1.0.1" date="" description="">
+			<action dev="kdoerges" type="update">
+				update to parent 1.0.1
+			</action>	
 			<action dev="kdoerges" type="add">
 				storeText will find text by label
 			</action>
