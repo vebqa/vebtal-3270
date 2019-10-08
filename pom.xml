@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>com.github.vebqa</groupId>
 		<artifactId>vebtal-parent</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 	</parent>
 	<artifactId>vebtal-3270</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 
 	<name>Test Adaption Layer for Telnet 3270 terminals</name>
 	<description>Provides access for testing Telnet 3270 graphical user interfaces with junit / assertj or keyword driven approach</description>
@@ -46,8 +46,8 @@
 			<url>https://github.com/kdoerges</url>
 		</developer>
 		<developer>
-		<name>Nithiyaa Radjindirin</name>
-		<url>https://github.com/nitfeu</url>
+			<name>Nithiyaa Radjindirin</name>
+			<url>https://github.com/nitfeu</url>
 		</developer>		
 	</developers>
 
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>com.github.vebqa</groupId>
 			<artifactId>vebtal-api</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.vebqa</groupId>

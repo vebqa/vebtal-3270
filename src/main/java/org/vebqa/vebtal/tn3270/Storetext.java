@@ -89,32 +89,34 @@ public class Storetext extends AbstractCommand {
 		if (!identByLabel) {
 			String foundString = null;
 			try {
-			if (length > 0) {
-				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber + length - 1); // Row &
-																												// Column
-																												// values
-																												// decremented
-																												// with
-																												// 1 for
-																												// the
-																												// convenience
-																												// of
-																												// Tosca
-																												// Users
-			} else {
-				length = driver.getLine(rowNumber - 1).length();
-				foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, length - columnNumber - 1); // Row &
-																												// Column
-																												// values
-																												// decremented
-																												// with
-																												// 1 for
-																												// the
-																												// convenience
-																												// of
-																												// Tosca
-																												// Users
-			}
+				if (length > 0) {
+					foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber + length - 1); // Row
+																														// &
+					// Column
+					// values
+					// decremented
+					// with
+					// 1 for
+					// the
+					// convenience
+					// of
+					// Tosca
+					// Users
+				} else {
+					length = driver.getLine(rowNumber - 1).length();
+					foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, length - columnNumber - 1); // Row
+																														// &
+					// Column
+					// values
+					// decremented
+					// with
+					// 1 for
+					// the
+					// convenience
+					// of
+					// Tosca
+					// Users
+				}
 			} catch (NullPointerException e) {
 				tResp.setCode(Response.FAILED);
 				tResp.setMessage(e.getMessage());

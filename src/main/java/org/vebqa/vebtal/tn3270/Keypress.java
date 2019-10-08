@@ -14,7 +14,7 @@ import net.sf.f3270.Terminal;
 public class Keypress extends AbstractCommand {
 
 	private static final Logger logger = LoggerFactory.getLogger(Keypress.class);
-	
+
 	public Keypress(String aCommand, String aTarget, String aValue) {
 		super(aCommand, aTarget, aValue);
 		this.type = CommandType.ACTION;
@@ -22,9 +22,9 @@ public class Keypress extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
-		Terminal driver = (Terminal)aDriver;
+		Terminal driver = (Terminal) aDriver;
 		Response tResp = new Response();
-		
+
 		String aButton = this.value.toUpperCase();
 		if (aButton.startsWith("[") && aButton.endsWith("]")) {
 			aButton = aButton.substring(1, aButton.length());
@@ -33,25 +33,25 @@ public class Keypress extends AbstractCommand {
 			tResp.setCode(Response.FAILED);
 			tResp.setMessage("Need a Key as Value, e.g. [<Key>]");
 			return tResp;
-		}		
-		
+		}
+
 		// fast Generischer Ansatz
-		switch(aButton) {
+		switch (aButton) {
 		case "ENTER":
 			logger.info("keyPress <enter>");
 			driver.enter();
 			break;
-		
+
 		case "CLEAR":
 			logger.info("keypress <clear>");
 			driver.clear();
 			break;
-			
+
 		case "F3":
 			logger.info("keyPress <f3>");
 			driver.pf(3);
 			break;
-			
+
 		default:
 			logger.info("cannot process command: " + aButton);
 			break;

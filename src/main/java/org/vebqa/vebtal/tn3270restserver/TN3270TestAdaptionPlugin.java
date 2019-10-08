@@ -65,55 +65,57 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 	@Override
 	public Tab startup() {
 		Tab tnTab = createTab(ID, commandList, clData);
-		
+
 		// Add (Test generation)
 		Text txtGeneration = new Text();
 		txtGeneration.setText("test generation");
-		txtGeneration.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
-		
-		List<KeywordEntry> allModuleKeywords = KeywordFinder.getinstance().getKeywordsByModule(TN3270TestAdaptionPlugin.ID);
+		txtGeneration.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+
+		List<KeywordEntry> allModuleKeywords = KeywordFinder.getinstance()
+				.getKeywordsByModule(TN3270TestAdaptionPlugin.ID);
 		TreeSet<String> sortedKeywords = new TreeSet<>();
 		for (KeywordEntry aKeyword : allModuleKeywords) {
 			sortedKeywords.add(aKeyword.getCommand());
 		}
-		
-		final CommandAutoComplete addCommand = new CommandAutoComplete(sortedKeywords);
-        addCommand.setPromptText("Command");
-        addCommand.setMaxWidth(200);
-        final TextField addTarget = new TextField();
-        addTarget.setMaxWidth(350);
-        addTarget.setPromptText("Target");
-        final TextField addValue = new TextField();
-        addValue.setMaxWidth(350);
-        addValue.setPromptText("Value");
- 
-        final Button addButton = new Button("Go");
-        addButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-            	Command newCmd = new Command(addCommand.getText(), addTarget.getText(), addValue.getText());
-            	
-                addCommand.clear();
-                addTarget.clear();
-                addValue.clear();
-                
-                Tn3270Resource aResource = new Tn3270Resource();
-                GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.CONNECTED);
-                aResource.execute(newCmd);
-                GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.DISCONNECTED);
-            }
-        });
- 
-        HBox hbox = new HBox();
-         
-        hbox.getChildren().addAll(txtGeneration, addCommand, addTarget, addValue, addButton);
-        hbox.setSpacing(5);
-        hbox.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, new CornerRadii(2), new BorderWidths(3))));
 
-		BorderPane pane = (BorderPane)tnTab.getContent();
-		pane.setTop(hbox);        
-        
-        return tnTab;
+		final CommandAutoComplete addCommand = new CommandAutoComplete(sortedKeywords);
+		addCommand.setPromptText("Command");
+		addCommand.setMaxWidth(200);
+		final TextField addTarget = new TextField();
+		addTarget.setMaxWidth(350);
+		addTarget.setPromptText("Target");
+		final TextField addValue = new TextField();
+		addValue.setMaxWidth(350);
+		addValue.setPromptText("Value");
+
+		final Button addButton = new Button("Go");
+		addButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				Command newCmd = new Command(addCommand.getText(), addTarget.getText(), addValue.getText());
+
+				addCommand.clear();
+				addTarget.clear();
+				addValue.clear();
+
+				Tn3270Resource aResource = new Tn3270Resource();
+				GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.CONNECTED);
+				aResource.execute(newCmd);
+				GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.DISCONNECTED);
+			}
+		});
+
+		HBox hbox = new HBox();
+
+		hbox.getChildren().addAll(txtGeneration, addCommand, addTarget, addValue, addButton);
+		hbox.setSpacing(5);
+		hbox.setBorder(new Border(
+				new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, new CornerRadii(2), new BorderWidths(3))));
+
+		BorderPane pane = (BorderPane) tnTab.getContent();
+		pane.setTop(hbox);
+
+		return tnTab;
 
 	}
 

@@ -19,7 +19,7 @@ public class Type extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
-		Terminal driver = (Terminal)aDriver;
+		Terminal driver = (Terminal) aDriver;
 		Response tResp = new Response();
 
 		String label = null;

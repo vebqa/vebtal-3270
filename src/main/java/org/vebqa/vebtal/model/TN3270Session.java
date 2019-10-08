@@ -5,16 +5,16 @@ public class TN3270Session {
 	private String host;
 	private String port;
 	private String type;
-		
+
 	public TN3270Session() {
 	}
-	
+
 	public TN3270Session(String aHost, String aPort, String aType) {
 		this.host = aHost;
 		this.port = aPort;
 		this.type = aType;
 	}
-	
+
 	public String getHost() {
 		return host;
 	}

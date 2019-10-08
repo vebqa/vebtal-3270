@@ -18,16 +18,16 @@ public class Verifytext extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
-		Terminal driver = (Terminal)aDriver;
-				
+		Terminal driver = (Terminal) aDriver;
+
 		Response tResp = new Response();
-				
+
 		int rowNumber = 0;
 		int columnNumber = 0;
 
 		String searchString = value.toString();
 		int searchStringLength = value.length();
-		
+
 		// Beispiel; target: "row=10;column=21"
 		String[] parts = target.split(";");
 
@@ -42,9 +42,13 @@ public class Verifytext extends AbstractCommand {
 				break;
 			}
 		}
-		
-		String foundString = driver.getLine(rowNumber - 1).substring(columnNumber - 1, columnNumber - 1 + searchStringLength).toString(); //Row & Column values decremented with 1 for the convenience of Tosca Users
-		
+
+		String foundString = driver.getLine(rowNumber - 1)
+				.substring(columnNumber - 1, columnNumber - 1 + searchStringLength).toString(); // Row & Column values
+																								// decremented with 1
+																								// for the convenience
+																								// of Tosca Users
+
 		if (foundString.equals(searchString)) {
 			tResp.setCode(Response.PASSED);
 			tResp.setMessage("Matching text found!");
@@ -55,5 +59,5 @@ public class Verifytext extends AbstractCommand {
 
 		return tResp;
 	}
-	
+
 }

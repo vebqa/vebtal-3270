@@ -25,11 +25,11 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 
 	public Tn3270Resource() {
 	}
-	
+
 	public Response execute(Command cmd) {
-		
+
 		TN3270TestAdaptionPlugin.setDisableUserActions(true);
-		
+
 		Response tResponse = new Response();
 
 		Response result = null;
@@ -37,19 +37,19 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 			Class<?> cmdClass = Class.forName("org.vebqa.vebtal.tn3270." + getCommandClassName(cmd));
 			Constructor<?> cons = cmdClass.getConstructor(String.class, String.class, String.class);
 			Object cmdObj = cons.newInstance(cmd.getCommand(), cmd.getTarget(), cmd.getValue());
-			
+
 			// get type
 			Method mType = cmdClass.getMethod("getType");
-			CommandType cmdType = (CommandType)mType.invoke(cmdObj);
+			CommandType cmdType = (CommandType) mType.invoke(cmdObj);
 			TN3270TestAdaptionPlugin.addCommandToList(cmd, cmdType);
-			
+
 			// execute
 			Method m = cmdClass.getDeclaredMethod("executeImpl", Object.class);
-			
+
 			setStart();
 			result = (Response) m.invoke(cmdObj, driver);
 			setFinished();
-			
+
 		} catch (ClassNotFoundException e) {
 			logger.error("Command implementation class not found!", e);
 		} catch (NoSuchMethodException e) {
@@ -83,7 +83,7 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 				TN3270TestAdaptionPlugin.setLatestResult(true, "not connected to host");
 			}
 		}
-		
+
 		TN3270TestAdaptionPlugin.setDisableUserActions(true);
 		return result;
 	}

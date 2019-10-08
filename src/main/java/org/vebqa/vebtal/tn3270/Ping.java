@@ -18,7 +18,7 @@ public class Ping extends AbstractCommand {
 		Response tResponse = new Response();
 		tResponse.setCode(Response.PASSED);
 		tResponse.setMessage("Service " + TN3270TestAdaptionPlugin.ID + " is up and running.");
-		
+
 		return tResponse;
 	}
 }
