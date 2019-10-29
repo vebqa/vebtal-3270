@@ -47,6 +47,11 @@ public class Keypress extends AbstractCommand {
 			driver.clear();
 			break;
 
+		case "TAB":
+			logger.info("keypress <tab>");
+			driver.tab();
+			break;
+
 		case "F3":
 			logger.info("keyPress <f3>");
 			driver.pf(3);
