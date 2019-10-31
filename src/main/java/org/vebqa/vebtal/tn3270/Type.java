@@ -44,21 +44,16 @@ public class Type extends AbstractCommand {
 				tResp.setCode(Response.FAILED);
 				tResp.setMessage(e.getMessage());
 			}
-		} else if (label == null) {
-			if (label == null) {
-				try {
-					driver.write(value);
-					tResp.setCode(Response.PASSED);
-				} catch (RuntimeException e) {
-					tResp.setCode(Response.FAILED);
-					tResp.setMessage(e.getMessage());
-				}
-			}
 		} else {
-			// Field not found!
-			tResp.setCode(Response.FAILED);
-			tResp.setMessage("Field not found!");
-		}
+			// just send the text
+			try {
+				driver.write(value);
+				tResp.setCode(Response.PASSED);
+			} catch (RuntimeException e) {
+				tResp.setCode(Response.FAILED);
+				tResp.setMessage(e.getMessage());
+			}
+		} 
 
 		return tResp;
 	}

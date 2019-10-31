@@ -72,7 +72,7 @@ public class Tn3270Resource extends AbstractTestAdaptionResource implements Test
 			TN3270TestAdaptionPlugin.setDisableUserActions(true);
 			return tResponse;
 		}
-		if (result.getCode() != "0") {
+		if (result.getCode().equals(Response.FAILED)) {
 			TN3270TestAdaptionPlugin.setLatestResult(false, result.getMessage());
 		} else {
 			// test if driver is connected

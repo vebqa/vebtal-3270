@@ -2,6 +2,8 @@ package org.vebqa.vebtal.tn3270;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.vebqa.vebtal.GuiManager;
 import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
@@ -19,6 +21,8 @@ import net.sf.f3270.TerminalType;
 @Keyword(module = TN3270TestAdaptionPlugin.ID, command = "open", description = "Open a terminal", hintTarget = "<empty>", hintValue = "<empty")
 public class Open extends AbstractCommand {
 
+	private static final Logger logger = LoggerFactory.getLogger(Open.class);
+	
 	public Open(String aCommand, String aTarget, String aValue) {
 		super(aCommand, aTarget, aValue);
 		this.type = CommandType.ACTION;
@@ -26,7 +30,16 @@ public class Open extends AbstractCommand {
 
 	@Override
 	public Response executeImpl(Object aDriver) {
+		Response tResponse = new Response();
+		
+		// there should be no terminal object available at this moment, so raise an error!
 		Terminal driver = (Terminal) aDriver;
+		if (driver.isConnected()) {
+			tResponse.setCode(Response.FAILED);
+			tResponse.setMessage("Already connected to test object. Close existing session before openinig a new one!");
+			return tResponse;
+		}
+		
 		// find s3270 terminal emulator
 		String emulatorPath = GuiManager.getinstance().getConfig().getString("emulator.path");
 		File dir = new File(emulatorPath);
@@ -62,8 +75,14 @@ public class Open extends AbstractCommand {
 				break;
 			case "charset":
 				charset = String.valueOf(parts[1]);
+				break;
 			case "debug":
 				debug = String.valueOf(parts[1]);
+				break;
+				
+			default:
+				logger.warn("Unrecognized key: {}", parts[1]);
+				break;
 			}
 		}
 
@@ -80,7 +99,6 @@ public class Open extends AbstractCommand {
 
 		Tn3270Resource.setDriver(driver);
 
-		Response tResponse = new Response();
 		tResponse.setCode(Response.PASSED);
 
 		GuiManager.getinstance().setTabStatus(TN3270TestAdaptionPlugin.ID, SutStatus.CONNECTED);
