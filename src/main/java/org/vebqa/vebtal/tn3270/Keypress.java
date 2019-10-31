@@ -52,9 +52,69 @@ public class Keypress extends AbstractCommand {
 			driver.tab();
 			break;
 
+		case "ATTN":
+			logger.info("keypress <attn>");
+			driver.attn();
+			break;
+			
+		case "F1":
+			logger.info("keyPress <f1>");
+			driver.pf(1);
+			break;
+
+		case "F2":
+			logger.info("keyPress <f2>");
+			driver.pf(2);
+			break;
+
 		case "F3":
 			logger.info("keyPress <f3>");
 			driver.pf(3);
+			break;
+
+		case "F4":
+			logger.info("keyPress <f4>");
+			driver.pf(4);
+			break;
+
+		case "F5":
+			logger.info("keyPress <f5>");
+			driver.pf(5);
+			break;
+
+		case "F6":
+			logger.info("keyPress <f6>");
+			driver.pf(6);
+			break;
+
+		case "F7":
+			logger.info("keyPress <f7>");
+			driver.pf(7);
+			break;
+
+		case "F8":
+			logger.info("keyPress <f8>");
+			driver.pf(8);
+			break;
+
+		case "F9":
+			logger.info("keyPress <f9>");
+			driver.pf(9);
+			break;
+	
+		case "F10":
+			logger.info("keyPress <f10>");
+			driver.pf(10);
+			break;
+
+		case "F11":
+			logger.info("keyPress <f11>");
+			driver.pf(11);
+			break;
+
+		case "F12":
+			logger.info("keyPress <f12>");
+			driver.pf(12);
 			break;
 
 		default:
