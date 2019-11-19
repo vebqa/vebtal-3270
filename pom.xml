@@ -48,7 +48,7 @@
 		<developer>
 			<name>Nithiyaa Radjindirin</name>
 			<url>https://github.com/nitfeu</url>
-		</developer>		
+		</developer>
 	</developers>
 
 	<dependencies>
@@ -68,10 +68,14 @@
 			<version>${version.slf4j}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${version.assertj}</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${version.junit}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

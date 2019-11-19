@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.tn3270;
+package org.vebqa.vebtal.tn3270.commands;
 
 import java.io.File;
 
@@ -34,7 +34,7 @@ public class Open extends AbstractCommand {
 		
 		// there should be no terminal object available at this moment, so raise an error!
 		Terminal driver = (Terminal) aDriver;
-		if (driver.isConnected()) {
+		if ((driver != null) && (driver.isConnected())) {
 			tResponse.setCode(Response.FAILED);
 			tResponse.setMessage("Already connected to test object. Close existing session before openinig a new one!");
 			return tResponse;

@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.tn3270;
+package org.vebqa.vebtal.tn3270.commands;
 
 import org.h3270.host.Field;
 import org.vebqa.vebtal.annotations.Keyword;

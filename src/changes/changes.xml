@@ -6,6 +6,23 @@
 		<author email="kdoerges@googlemail.com">Karsten Doerges</author>
 	</properties>
 	<body>
+		<release version="1.0.2.2" date="2019-11.19" description="">
+			<action dev="kdoerges" type="add">
+				new keyword findTextInArea
+			</action>
+			<action dev="kdoerges" type="fix">
+				fail open command if a session already exist
+			</action>
+			<action dev="kdoerges" type="add">
+				refactor keywords to package commands
+			</action>
+			<action dev="kdoerges" type="add">
+				add new ActionAssert for actions
+			</action>
+			<action dev="kdoerges" type="add">
+				added SpecLine class for creating keywords
+			</action>
+		</release>
 		<release version="1.0.2.1" date="2019-10.31" description="">
 			<action dev="kdoerges" type="add">
 				keyword open will raise an error if a session is already existing

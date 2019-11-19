@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.tn3270;
+package org.vebqa.vebtal.tn3270.commands;
 
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.CommandType;

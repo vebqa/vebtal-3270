@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.tn3270;
+package org.vebqa.vebtal.tn3270.commands;
 
 import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
@@ -26,10 +26,11 @@ public class Type extends AbstractCommand {
 		FieldIdentifier field = null;
 
 		// konvention: label=x
-		String[] parts = target.split("=");
+		String[] parts = target.split("[=]{1}");
 		switch (parts[0]) {
 		case "label":
 			label = parts[1];
+			label = label.replace('^', '=');
 			field = new FieldIdentifier(label);
 			break;
 		default:

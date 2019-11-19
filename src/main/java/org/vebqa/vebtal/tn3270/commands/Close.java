@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.tn3270;
+package org.vebqa.vebtal.tn3270.commands;
 
 import org.vebqa.vebtal.GuiManager;
 import org.vebqa.vebtal.annotations.Keyword;

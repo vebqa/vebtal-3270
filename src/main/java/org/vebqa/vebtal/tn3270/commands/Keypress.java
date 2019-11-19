@@ -1,4 +1,4 @@
-package org.vebqa.vebtal.tn3270;
+package org.vebqa.vebtal.tn3270.commands;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
