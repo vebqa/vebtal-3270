@@ -20,7 +20,8 @@ public class ActionAssertTest {
 	@Test
 	public void OpenMusicAndGoToLoginPage() {
 		ActionAssert.assertThat(terminal).doKeypress("[ENTER]");
-		
+		terminal.getDriver().moveCursor(10, 10);
+		terminal.getDriver().moveCursor(2, 17);
 		ActionAssert.assertThat(terminal).forLabel("  MUSIC Userid:").doType("$0000");
 		
 		ActionAssert.assertThat(terminal).forLabel("Password").doType("music");

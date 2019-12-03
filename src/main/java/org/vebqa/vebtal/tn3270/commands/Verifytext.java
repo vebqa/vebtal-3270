@@ -61,15 +61,7 @@ public class Verifytext extends AbstractCommand {
 				tResp.setMessage("Identification by position needs both row and column!");
 			} else {
 				String foundString = driver.getLine(rowNumber - 1)
-						.substring(columnNumber - 1, columnNumber - 1 + searchStringLength).toString(); // Row & Column
-																										// values
-																										// decremented
-																										// with
-																										// 1
-																										// for the
-																										// convenience
-																										// of Tosca
-																										// Users
+						.substring(columnNumber - 1, columnNumber + searchStringLength -1).toString(); 
 
 				if (foundString.equals(searchString)) {
 					tResp.setCode(Response.PASSED);

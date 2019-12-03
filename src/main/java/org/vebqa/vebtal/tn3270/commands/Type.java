@@ -23,22 +23,28 @@ public class Type extends AbstractCommand {
 		Response tResp = new Response();
 
 		String label = null;
+		int skip = 1;
 		FieldIdentifier field = null;
 
 		// konvention: label=x
-		String[] parts = target.split("[=]{1}");
-		switch (parts[0]) {
-		case "label":
-			label = parts[1];
-			label = label.replace('^', '=');
-			field = new FieldIdentifier(label);
-			break;
-		default:
-			break;
+		String[] someToken = target.split(";");
+		for (String aToken : someToken) {
+			String[] parts = aToken.split("=");
+			switch (parts[0]) {
+			case "label":
+				label = parts[1];
+				label = label.replace('^', '=');
+				break;
+			case "skip":
+				skip = Integer.valueOf(parts[1]);
+				break;
+			default:
+				break;
+			}
 		}
-
-		if (field != null) {
+		if (label != null) {
 			try {
+				field = new FieldIdentifier(label, skip);
 				driver.write(field, value);
 				tResp.setCode(Response.PASSED);
 			} catch (RuntimeException e) {
@@ -54,7 +60,7 @@ public class Type extends AbstractCommand {
 				tResp.setCode(Response.FAILED);
 				tResp.setMessage(e.getMessage());
 			}
-		} 
+		}
 
 		return tResp;
 	}

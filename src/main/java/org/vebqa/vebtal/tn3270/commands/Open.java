@@ -53,6 +53,7 @@ public class Open extends AbstractCommand {
 		String model = "MODE_80_24";
 		String charset = "BRACKET";
 		String debug = "false";
+		boolean trace = false;
 
 		// Beispiel: target= host=ctbtest;port=992;codepage=1141;ssltype=sslv3
 		String[] someToken = target.split(";");
@@ -79,7 +80,9 @@ public class Open extends AbstractCommand {
 			case "debug":
 				debug = String.valueOf(parts[1]);
 				break;
-				
+			case "trace":
+				trace = Boolean.valueOf(parts[1]);
+				break;
 			default:
 				logger.warn("Unrecognized key: {}", parts[1]);
 				break;
@@ -89,11 +92,11 @@ public class Open extends AbstractCommand {
 		if (debug.toLowerCase().contains("true")) {
 			driver = new Terminal(dir.getAbsolutePath(), host, Integer.valueOf(port),
 					TerminalType.valueOf(String.valueOf(type)), TerminalModel.valueOf(String.valueOf(model)),
-					HostCharset.valueOf(charset), true, true);
+					HostCharset.valueOf(charset), true, trace);
 		} else {
 			driver = new Terminal(dir.getAbsolutePath(), host, Integer.valueOf(port),
 					TerminalType.valueOf(String.valueOf(type)), TerminalModel.valueOf(String.valueOf(model)),
-					HostCharset.valueOf(charset), false);
+					HostCharset.valueOf(charset), false, trace);
 		}
 		driver.connect();
 
