@@ -2,16 +2,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
 	<properties>
-		<title>VEBTAL PDF - Test Adaption Layer</title>
+		<title>openTAL PDF - Test Adaption Layer</title>
 		<author email="kdoerges@googlemail.com">Karsten Doerges</author>
 	</properties>
 	<body>
-		<release version="1.0.2.3" date="2019-12.03" description="">
+	
+		<release version="1.0.3" date="2019-12.04" description="">
 			<action dev="kdoerges" type="add">
 				added attribute trace to open keyword 
 			</action>
 			<action dev="kdoerges" type="add">
-				type keyword will accept skip attribute now
+				added attribute trace to open keyword 
+			</action>
+			<action dev="kdoerges" type="add">
+				type keyword type will accept skip attribute now
 			</action>
 			<action dev="kdoerges" type="add">
 				new keyword findTextInArea
