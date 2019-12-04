@@ -117,6 +117,66 @@ public class Keypress extends AbstractCommand {
 			driver.pf(12);
 			break;
 
+		case "F13":
+			logger.info("keyPress <f13>");
+			driver.pf(13);
+			break;
+			
+		case "F14":
+			logger.info("keyPress <f14>");
+			driver.pf(14);
+			break;
+			
+		case "F15":
+			logger.info("keyPress <f15>");
+			driver.pf(15);
+			break;
+			
+		case "F16":
+			logger.info("keyPress <f16>");
+			driver.pf(16);
+			break;
+			
+		case "F17":
+			logger.info("keyPress <f17>");
+			driver.pf(17);
+			break;
+			
+		case "F18":
+			logger.info("keyPress <f18>");
+			driver.pf(18);
+			break;
+			
+		case "F19":
+			logger.info("keyPress <f19>");
+			driver.pf(19);
+			break;
+			
+		case "F20":
+			logger.info("keyPress <f20>");
+			driver.pf(20);
+			break;
+			
+		case "F21":
+			logger.info("keyPress <f21>");
+			driver.pf(21);
+			break;
+			
+		case "F22":
+			logger.info("keyPress <f22>");
+			driver.pf(22);
+			break;
+			
+		case "F23":
+			logger.info("keyPress <f23>");
+			driver.pf(23);
+			break;
+			
+		case "F24":
+			logger.info("keyPress <f24>");
+			driver.pf(24);
+			break;
+
 		default:
 			logger.info("cannot process command: " + aButton);
 			break;

@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>com.github.vebqa</groupId>
 		<artifactId>vebtal-parent</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 	</parent>
 	<artifactId>vebtal-3270</artifactId>
-	<version>1.0.2.3</version>
+	<version>1.0.3</version>
 
 	<name>Test Adaption Layer for Telnet 3270 terminals</name>
 	<description>Provides access for testing Telnet 3270 graphical user interfaces with junit / assertj or keyword driven approach</description>
