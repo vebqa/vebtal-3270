@@ -1,5 +1,7 @@
 package org.vebqa.vebtal.tn3270.commands;
 
+import java.util.regex.Pattern;
+
 import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.Area;
@@ -61,13 +63,17 @@ public class Findtextinarea extends AbstractCommand {
 
 		for (int rowNumber = startRow; rowNumber <= endRow; rowNumber++) {
 			String rowArea = driver.getLine(rowNumber).substring(columnStart, columnEnd).toString();
-			row = rowArea.indexOf(area.getNeedle());
+			// int index = rowArea.indexOf(area.getNeedle());
+			
+			// use regex, because we want to search case insensitive
+			found = Pattern.compile(Pattern.quote(area.getNeedle()), Pattern.CASE_INSENSITIVE).matcher(rowArea).find();
+			
 			// found!
-			if (row >= 0) {
+			if (found) {
 				tResp.setCode(Response.PASSED);
-				tResp.setMessage("Needle: " + area.getNeedle() + " found in row: " + row);
+				tResp.setMessage("Needle: " + area.getNeedle() + " found in row: " + rowNumber);
 				tResp.setStoredKey(value);
-				tResp.setStoredValue(String.valueOf(row));
+				tResp.setStoredValue(String.valueOf(rowNumber));
 				break;
 			}
 		}
