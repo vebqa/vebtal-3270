@@ -6,7 +6,12 @@
 		<author email="kdoerges@googlemail.com">Karsten Doerges</author>
 	</properties>
 	<body>
-	
+
+		<release version="1.0.3.1" date="2019-12.05" description="">
+			<action dev="kdoerges" type="fix">
+				fix zero-based issue in keyword findTextInArea 
+			</action>
+		</release>	
 		<release version="1.0.3" date="2019-12.04" description="">
 			<action dev="kdoerges" type="add">
 				added attribute trace to open keyword 

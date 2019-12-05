@@ -2,6 +2,8 @@ package org.vebqa.vebtal.tn3270.commands;
 
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.vebqa.vebtal.annotations.Keyword;
 import org.vebqa.vebtal.command.AbstractCommand;
 import org.vebqa.vebtal.model.Area;
@@ -13,6 +15,8 @@ import net.sf.f3270.Terminal;
 
 @Keyword(module = TN3270TestAdaptionPlugin.ID, command = "findTextInArea", description = "find text in a given area and return row number", hintTarget = "x=;y=;height=;width=;needle=", hintValue = "<variable>")
 public class Findtextinarea extends AbstractCommand {
+
+	private static final Logger logger = LoggerFactory.getLogger(Findtextinarea.class);
 
 	public Findtextinarea(String aCommand, String aTarget, String aValue) {
 		super(aCommand, aTarget, aValue);
@@ -51,7 +55,7 @@ public class Findtextinarea extends AbstractCommand {
 		}
 
 		boolean found = false;
-		
+
 		// intial or default if not found
 		int row = -1;
 
@@ -63,28 +67,32 @@ public class Findtextinarea extends AbstractCommand {
 
 		for (int rowNumber = startRow; rowNumber <= endRow; rowNumber++) {
 			String rowArea = driver.getLine(rowNumber).substring(columnStart, columnEnd).toString();
+			logger.info("Row {} and needle to find {}", rowArea, area.getNeedle());
+
 			// int index = rowArea.indexOf(area.getNeedle());
-			
+
 			// use regex, because we want to search case insensitive
 			found = Pattern.compile(Pattern.quote(area.getNeedle()), Pattern.CASE_INSENSITIVE).matcher(rowArea).find();
-			
+
 			// found!
 			if (found) {
+				// as we are zero based we have to add one here
+				row = rowNumber + 1;
 				tResp.setCode(Response.PASSED);
-				tResp.setMessage("Needle: " + area.getNeedle() + " found in row: " + rowNumber);
+				tResp.setMessage("Needle: " + area.getNeedle() + " found in row: " + row);
 				tResp.setStoredKey(value);
-				tResp.setStoredValue(String.valueOf(rowNumber));
+				tResp.setStoredValue(String.valueOf(row));
 				break;
 			}
 		}
-		
+
 		if (row < 0) {
 			tResp.setCode(Response.FAILED);
 			tResp.setMessage("Needle not found.");
 			tResp.setStoredKey(value);
 			tResp.setStoredValue(String.valueOf(row));
 		}
-		
+
 		return tResp;
 	}
 
