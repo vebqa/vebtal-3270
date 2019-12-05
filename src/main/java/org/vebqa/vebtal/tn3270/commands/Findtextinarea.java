@@ -9,7 +9,7 @@ import org.vebqa.vebtal.tn3270restserver.TN3270TestAdaptionPlugin;
 
 import net.sf.f3270.Terminal;
 
-@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "findTextInArea", description = "find text in a given area and returrn row number", hintTarget = "x=;y=;heigth=;width=;needle=", hintValue = "<variable>")
+@Keyword(module = TN3270TestAdaptionPlugin.ID, command = "findTextInArea", description = "find text in a given area and return row number", hintTarget = "x=;y=;height=;width=;needle=", hintValue = "<variable>")
 public class Findtextinarea extends AbstractCommand {
 
 	public Findtextinarea(String aCommand, String aTarget, String aValue) {
@@ -49,15 +49,18 @@ public class Findtextinarea extends AbstractCommand {
 		}
 
 		boolean found = false;
+		
+		// intial or default if not found
 		int row = -1;
 
+		// we are zero based here
 		int startRow = area.getY() - 1;
-		int endRow = startRow + area.getHeight() - 1;
+		int endRow = startRow + area.getHeight();
 		int columnStart = area.getX() - 1;
-		int columnEnd = columnStart + area.getWidth() - 1;
+		int columnEnd = columnStart + area.getWidth();
 
 		for (int rowNumber = startRow; rowNumber <= endRow; rowNumber++) {
-			String rowArea = driver.getLine(rowNumber - 1).substring(columnStart, columnEnd).toString();
+			String rowArea = driver.getLine(rowNumber).substring(columnStart, columnEnd).toString();
 			row = rowArea.indexOf(area.getNeedle());
 			// found!
 			if (row >= 0) {
