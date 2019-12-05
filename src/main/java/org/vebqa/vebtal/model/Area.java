@@ -47,6 +47,7 @@ public class Area {
 	
 	private void parseSpecLine(String aSpecLine) throws Exception {
 		boolean invalidArea = false;
+		String invalidToken = null;
 		String[] someFragments = aSpecLine.split(";");
 		for (String aFragment : someFragments) {
 			aFragment = aFragment.trim().toLowerCase();
@@ -72,11 +73,12 @@ public class Area {
 				break;
 			default:
 				invalidArea = true;
+				invalidToken = someToken[0];
 				break;
 			}
 		}
 		if (invalidArea) {
-			throw new Exception("Invalid area data!");
+			throw new Exception("Invalid token found in area specification: " + invalidToken);
 		}
 		logger.info("Area created: {},{} - {},{}", x, y, height, width);
 	}
