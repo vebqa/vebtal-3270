@@ -80,7 +80,13 @@ public class Area {
 		if (invalidArea) {
 			throw new Exception("Invalid token found in area specification: " + invalidToken);
 		}
-		logger.info("Area created: {},{} - {},{}", x, y, height, width);
+		if (x == 0 || y == 0) {
+			throw new Exception("Specification of x,y has to start at 1, 1 (left, top corner)!");
+		}
+		if (width == 0 || height == 0) {
+			throw new Exception("width and height cannot be 0!");
+		}
+		logger.info("Area created: {},{} - {},{}", x, y, width, height);
 	}
 
 }

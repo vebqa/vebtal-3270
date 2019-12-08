@@ -33,6 +33,8 @@ public class Verifytext extends AbstractCommand {
 		// example: target: "label=<text>"
 		String[] parts = target.split(";");
 
+		boolean confMismatch = false;
+		
 		for (String aToken : parts) {
 			String[] part = aToken.split("=");
 			switch (part[0]) {
@@ -44,9 +46,19 @@ public class Verifytext extends AbstractCommand {
 				break;
 			case "label":
 				label = part[1];
+				break;
+			default:
+				confMismatch = true;
+				break;
 			}
 		}
 
+		if (confMismatch) {
+			tResp.setCode(Response.FAILED);
+			tResp.setMessage("There is a configuration error in the attribute list.");
+			return tResp;
+		}
+		
 		// dont mix different strategies for identification
 		if ((rowNumber > 0 || columnNumber > 0) && !label.isEmpty()) {
 			tResp.setCode(Response.FAILED);

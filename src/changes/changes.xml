@@ -9,6 +9,9 @@
 
 		<release version="1.0.3.1" date="2019-12.05" description="">
 			<action dev="kdoerges" type="fix">
+				area checks for specification starting at (1,1) 
+			</action>
+			<action dev="kdoerges" type="fix">
 				fix zero-based issue in keyword findTextInArea 
 			</action>
 		</release>	

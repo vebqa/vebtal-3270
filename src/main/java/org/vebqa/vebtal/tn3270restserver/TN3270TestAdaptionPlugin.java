@@ -121,7 +121,7 @@ public class TN3270TestAdaptionPlugin extends AbstractTestAdaptionPlugin {
 
 	public static void addCommandToList(Command aCmd, CommandType aType) {
 		String aValue = aCmd.getValue();
-		if (aCmd.getCommand().toLowerCase().indexOf("password") > 0) {
+		if (aCmd.getCommand().toLowerCase().indexOf("password") > -1) {
 			aValue = "*****";
 		}
 		CommandResult tCR = new CommandResult(aCmd.getCommand(), aCmd.getTarget(), aValue, aType);
